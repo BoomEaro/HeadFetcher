@@ -61,7 +61,6 @@ publishing {
 shadowJar {
     archiveBaseName.set("HeadFetcher")
     archiveClassifier.set("")
-    archiveVersion.set("")
 
     relocate("io.leangen", "ru.boomearo.headfetcher.libs.leangen")
     relocate("de.tr7zw.changeme.nbtapi", "ru.boomearo.headfetcher.libs.nbtapi")
