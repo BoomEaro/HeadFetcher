@@ -1,0 +1,10 @@
+name: HeadFetcher
+main: ru.boomearo.headfetcher.HeadFetcher
+version: '${version}'
+author: BoomEaro
+description: HeadFetcher
+api-version: 1.13
+commands:
+  headfetcher:
+    usage: /headfetcher
+    description: headfetcher

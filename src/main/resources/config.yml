@@ -1,0 +1,9 @@
+messages:
+  command_main: "&a/headfetcher &7- &fthis command"
+  command_reload: "&a/headfetcher reload &7- &freload configuration"
+  command_apply: "&a/headfetcher apply <name> &7- &fapply skin texture to the item"
+  do_not_have_permissions: "&cYou don't have enough permissions!"
+  configuration_reloaded: "&aConfiguration successfully reloaded!"
+  only_players: "&cOnly players can execute command!"
+  invalid_item: "&cInvalid item!"
+  applied: "&aTexture successfully applied!"

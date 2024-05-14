@@ -1,0 +1,82 @@
+plugins {
+    id "java"
+    id "java-library"
+    id "maven-publish"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+group = "ru.boomearo"
+version = "1.0"
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    maven {
+        name = "codemc-repo"
+        url "https://repo.codemc.org/repository/nms/"
+    }
+    maven {
+        name = "minecraft-repo"
+        url = "https://libraries.minecraft.net/"
+    }
+    maven {
+        name = "jitpack"
+        url = "https://jitpack.io"
+    }
+    maven {
+        name = "codemc-public"
+        url = "https://repo.codemc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT"
+
+    implementation "de.tr7zw:item-nbt-api:2.12.3"
+
+    compileOnly("org.projectlombok:lombok:1.18.32")
+    annotationProcessor("org.projectlombok:lombok:1.18.32")
+}
+
+publishing {
+    publications {
+        publishToMavenLocal(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+shadowJar {
+    archiveBaseName.set("HeadFetcher")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+
+    relocate("io.leangen", "ru.boomearo.headfetcher.libs.leangen")
+    relocate("de.tr7zw.changeme.nbtapi", "ru.boomearo.headfetcher.libs.nbtapi")
+    relocate("de.tr7zw.annotations", "ru.boomearo.headfetcher.libs.tr7zw.annotations")
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset "UTF-8"
+    filesMatching("plugin.yml") {
+        expand props
+    }
+}
+
+artifacts {
+    archives shadowJar
+}
